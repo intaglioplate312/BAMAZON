@@ -28,6 +28,42 @@ connection.query('SELECT * FROM products', function(err, rows) {
 });
 
 
-connection.end();
+
+
+//tooBuy ?
+//inquirer
+//prompt 
+//question = buy book?
+//type
+// answer (no, yes)
+// if or else
+// console thank you goodby
+
+//purchase
+//inquirer prompt
+//id of purchase 
+//quantity {
+// go to dabase == stock_qty compare purchase quanity with existing quantity
+//customerChoiceIDd 
+//customerChoiceQuanity
+//SELECT stock_qty FROM products
+//Where item_id  = customerChoice
+// item_id ==< Customer Choice {
+// finalTranasction(customerChoiceID, CustomerChoiceQuantiy);
+
+// Final Transaction (argument1, argument2)
+//function
+// SELECT price from prodcuts
+// where item_id = argument1;
+//console.log (price * argument2)
+
+//UPDATE products
+//SET stock_qty = stock_qty-argument2
+//WHERE item id = argument1;
+
+// Too Buy ();
+
+
+//connection.end();
 
 //bamazon_customer.js
