@@ -34,44 +34,45 @@ inquirer.prompt([{
     if (user.option === 'No Thanks, I have enough to read') {
         console.log("Thank you have a nice day");
     } else {
-        ToBuy();
+        // ToBuy();
+        console.log("buy a book");
     }
 });
 
-ToBuy() {
-    connection.query('SELECT * FROM products', function(err, rows) {
-        if (err) {
-            return callback(err);
-        }
-        console.log("\nID \tNAME\t\t\t\t\t\t PRICE");
-        for (var i = 0; i < rows.length; i++) {
-            console.log(rows[i].item_id + '\t' + rows[i].product_name + '\t$ ' + rows[i].price + '\n');
-            // Poormina can I align on decimal with \t
-        };
+// ToBuy() {
+//     connection.query('SELECT * FROM products', function(err, rows) {
+//         if (err) {
+//             return callback(err);
+//         }
+//         console.log("\nID \tNAME\t\t\t\t\t\t PRICE");
+//         for (var i = 0; i < rows.length; i++) {
+//             console.log(rows[i].item_id + '\t' + rows[i].product_name + '\t$ ' + rows[i].price + '\n');
+//             // Poormina can I align on decimal with \t
+//         };
 
-        //purchase
-        //inquirer prompt
-        inquirer.prompt([{
-                type: "input",
-                name: "customerChoiceID",
-                message: "Please enter the ID number of the product you would like to buy?",
-            },
-            {
-                type: "input",
-                name: "CustomerChoiceQuantiy",
-                message: "How many units would you like to buy?"
-            },
-        ]).then
+//         //purchase
+//         //inquirer prompt
+//         inquirer.prompt([{
+//                 type: "input",
+//                 name: "customerChoiceID",
+//                 message: "Please enter the ID number of the product you would like to buy?",
+//             },
+//             {
+//                 type: "input",
+//                 name: "CustomerChoiceQuantiy",
+//                 message: "How many units would you like to buy?"
+//             },
+//         ]).then
 
-        //id of purchase 
-        //quantity {
-        // go to db == stock_qty compare purchase quantity with existing quantity
-        //customerChoiceIDd 
-        //customerChoiceQuanity
-    });
+//         //id of purchase 
+//         //quantity {
+//         // go to db == stock_qty compare purchase quantity with existing quantity
+//         //customerChoiceIDd 
+//         //customerChoiceQuanity
+//     });
 
 
-};
+// };
 
 
 
