@@ -43,7 +43,7 @@ connection.query('SELECT * FROM products', function(err, rows) {
 //inquirer prompt
 //id of purchase 
 //quantity {
-// go to dabase == stock_qty compare purchase quanity with existing quantity
+// go to db == stock_qty compare purchase quantity with existing quantity
 //customerChoiceIDd 
 //customerChoiceQuanity
 //SELECT stock_qty FROM products
