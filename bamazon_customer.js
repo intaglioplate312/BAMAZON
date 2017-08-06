@@ -59,8 +59,21 @@ function buyBook() {
                     message: "How many units would you like to buy?"
                 },
             ]).then(function(user) {
-                console.log(user.customerChoiceID, user.customerChoiceQuantiy);
+                connection.query('SELECT * FROM products WHERE item_id =?' = [customerChoiceID], function(err, rows) {
+                    if (err) throw err;
+                    console.log(rows[i].item_id + '\t' + rows[i].product_name + '\t$ ' + rows[i].price + '\n');
+
+                })
+
+                //console.log(user.customerChoiceID, user.customerChoiceQuantiy);
             });
+
+
+
+
+
+
+
         }
     })
 }
