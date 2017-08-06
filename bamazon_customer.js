@@ -14,14 +14,14 @@ connection.connect(function(err) {
     if (err) throw err;
     console.log('connected as id ' + connection.threadId);
 });
-BuyBooks();
+order();
 
-function buyBooks() {
+function order() {
     // display all of the items that are for sale: IDs, names, and price
     connection.query('SELECT * FROM products', function(err, rows) {
         if (err) throw err;
         //book list formatting
-        console.log("Welcome to Helen’s Idiosyncratic Book Shop");
+        console.log("Welcome to Helen's idosynratic Book Store");
         console.log("\nID \tNAME\t\t\t\t\t\t PRICE");
         for (var i = 0; i < rows.length; i++) {
             console.log(rows[i].item_id + '\t' + rows[i].product_name + '\t$ ' + rows[i].price + '\n');
@@ -30,6 +30,7 @@ function buyBooks() {
     });
 
     // prompt user to ask them the ID of the product they would like to buy
+
     inquirer.prompt([{
         type: "list",
         name: "option",
@@ -44,11 +45,12 @@ function buyBooks() {
         if (answer.option === 'No Thanks, I have enough to read') {
             console.log("Thank you have a nice day");
 
+
         } else {
-            // if yes ask item ID (id, ego, super ego) of book = customerChoiceID
+            // if yes ask item id of book = customerChoiceID
             inquirer.prompt([{
                     type: "input",
-                    name: "ego",
+                    name: "id",
                     message: "Please enter the ID number of the product you would like to buy?"
                         //add validation if time allows
                         // yes ask number of copies wanted= customerChoiceQuantiy
@@ -60,52 +62,27 @@ function buyBooks() {
                         //add validation if time allows
                 }
             ]).then(function(answers) {
-                console.log(answers.ego, answers.amount)
-                    //security issue??  
-                connection.query('SELECT * FROM Products WHERE item_id = ?', [answers.ego], function(err, res) {
+
+                connection.query('SELECT * FROM Products WHERE item_id = ?', [answers.id], function(err, res) {
                     if (err) throw err;
 
-                    // Check stock_qty
+                    // Check stock
                     if (answers.amount > res[0].stock_qty) {
                         console.log("Sorry that item is currently out of stock" + '\n' + '\n');
 
-                        buyBooks();
+                        order();
                     }
-                    // Price to customer 100% markup
-
+                    // total amount due:
+                    else {
+                        var total = answers.amount * res[0].price
+                        console.log("Your total is " + total + "Thank you for your business!");
+                        //updates stock
+                        connection.query('UPDATE Products SET stock_qty = "' (res[0].stock_qty - answers.amount) + '" WHERE product_name = "' + answers.item_id + '"');
+                    }
                 })
             });
         }
     })
 };
 
-
-
-//purchase
-//inquirer prompt
-//id of purchase 
-//quantity {
-// go to db == stock_qty compare purchase quantity with existing quantity
-//customerChoiceIDd 
-//customerChoiceQuanity
-//SELECT stock_qty FROM products
-//Where item_id  = customerChoice
-// item_id ==< Customer Choice {
-// finalTranasction(customerChoiceID, CustomerChoiceQuantiy);
-
-// Final Transaction (argument1, argument2)
-//function
-// SELECT price from prodcuts
-// where item_id = argument1;
-//console.log (price * argument2)
-
-//UPDATE products
-//SET stock_qty = stock_qty-argument2
-//WHERE item id = argument1;
-
-// Too Buy ();
-
-
-//connection.end();
-
-//bamazon_customer.js
+// bamazon_customer.js
