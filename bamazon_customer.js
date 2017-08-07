@@ -67,7 +67,7 @@ function order() {
 
                     // Check stock
                     if (answers.amount > res[0].stock_qty) {
-                        console.log("Sorry that item is currently out of stock" + '\n' + '\n');
+                        console.log("Sorry that item is currently out of stock" + '\n' + "Please choose another item");
                         order();
                     }
                     // total amount due:
@@ -81,6 +81,8 @@ function order() {
                         ], function(err) {
                             if (err) throw err;
                             console.log("Your total is $ " + total + " Thank you for your business!");
+                            console.log("Have a nice day!");
+
                         })
                     }
                 })
@@ -89,5 +91,5 @@ function order() {
         }
     })
 };
-connection.end();
+
 // bamazon_customer.js
