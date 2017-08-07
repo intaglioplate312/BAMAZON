@@ -10,7 +10,6 @@ var connection = mysql.createConnection({
 
 // connect to bamazon database
 connection.connect(function(err) {
-
     if (err) throw err;
     console.log('connected as id ' + connection.threadId);
 });
@@ -74,10 +73,10 @@ function order() {
                     // total amount due:
                     else {
                         var total = answers.amount * res[0].price
-                        var newQty = res[0].stock_qty - answers.amount;
+                        var newQty = parseInt(res[0].stock_qty) - parseInt(answers.amount);
                         //console.log(newQty);
                         //updates stock
-                        connection.query('UPDATE products SET ? WHERE ?', [{ stock_qty: 68 },
+                        connection.query('UPDATE products SET ? WHERE ?', [{ stock_qty: newQty },
                             { item_id: answer.id }
                         ], function(err) {
                             if (err) throw err;
@@ -85,8 +84,10 @@ function order() {
                         })
                     }
                 })
+
             });
         }
     })
 };
+connection.end();
 // bamazon_customer.js
