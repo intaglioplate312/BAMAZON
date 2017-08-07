@@ -69,20 +69,24 @@ function order() {
                     // Check stock
                     if (answers.amount > res[0].stock_qty) {
                         console.log("Sorry that item is currently out of stock" + '\n' + '\n');
-
                         order();
                     }
                     // total amount due:
                     else {
                         var total = answers.amount * res[0].price
-                        console.log("Your total is " + total + "Thank you for your business!");
+                        var newQty = res[0].stock_qty - answers.amount;
+                        //console.log(newQty);
                         //updates stock
-                        connection.query('UPDATE Products SET stock_qty = "' (res[0].stock_qty - answers.amount) + '" WHERE product_name = "' + answers.item_id + '"');
+                        connection.query('UPDATE products SET ? WHERE ?', [{ stock_qty: 68 },
+                            { item_id: answer.id }
+                        ], function(err) {
+                            if (err) throw err;
+                            console.log("Your total is $ " + total + " Thank you for your business!");
+                        })
                     }
                 })
             });
         }
     })
 };
-
 // bamazon_customer.js
